@@ -12,18 +12,8 @@
 // Impedire la visualizzazione dei contenuti di index.php (anche semplici di prova) fino a quanto l'utente non sia loggato.
 // Bonus 2:
 // Prevedere l'uso di qualsiasi controllo attraverso una funzione inserita in un file separato in 'src/functions.php/') (modificato)
+session_start(); 
 require_once __DIR__ . "/listautenti.php";
-if (isset($_POST["username"])) {
-    $username = $_POST["username"];
-} else {
-    $username = "";
-}
-
-if (isset($_POST["password"])) {
-    $password = $_POST["password"];
-} else {
-    $password = "";
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +24,7 @@ if (isset($_POST["password"])) {
 </head>
 <body>
     <main>
-        <form action="./login.php" method="post">
+        <form action="./index.php" method="post">
             <div>
                 <label for="username">Inserire username:</label>
                 <input type="text" name="username" id="username">
@@ -45,8 +35,6 @@ if (isset($_POST["password"])) {
             </div>
             <input type="submit" value="submit">
         </form>
-        <h1><?php echo $username ?></h1>
-        <h1><?php echo $password ?></h1>
     </main>
 </body>
 </html>
