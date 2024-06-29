@@ -1,6 +1,4 @@
-<?php 
-require_once __DIR__ . "/login.php"
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +8,7 @@ require_once __DIR__ . "/login.php"
 </head>
 <body>
     <main>
-
+        <a href="./login.php">Login</a>
     </main>
 </body>
 </html>

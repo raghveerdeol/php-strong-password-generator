@@ -13,6 +13,17 @@
 // Bonus 2:
 // Prevedere l'uso di qualsiasi controllo attraverso una funzione inserita in un file separato in 'src/functions.php/') (modificato)
 require_once __DIR__ . "/listautenti.php";
+if (isset($_POST["username"])) {
+    $username = $_POST["username"];
+} else {
+    $username = "";
+}
+
+if (isset($_POST["password"])) {
+    $password = $_POST["password"];
+} else {
+    $password = "";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,7 +34,7 @@ require_once __DIR__ . "/listautenti.php";
 </head>
 <body>
     <main>
-        <form action="./index.php" method="post">
+        <form action="./login.php" method="post">
             <div>
                 <label for="username">Inserire username:</label>
                 <input type="text" name="username" id="username">
@@ -34,6 +45,8 @@ require_once __DIR__ . "/listautenti.php";
             </div>
             <input type="submit" value="submit">
         </form>
+        <h1><?php echo $username ?></h1>
+        <h1><?php echo $password ?></h1>
     </main>
 </body>
 </html>
