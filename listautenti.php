@@ -1,12 +1,12 @@
 <?php 
     $utenti = [
         [
-            "username" => "luca",
-            "password" => "luca00",
-        ],        
-        [
             "username" => "mario",
             "password" => "00Mario00",
+        ],        
+        [
+            "username" => "luca",
+            "password" => "luca00",
         ],        
         [
             "username" => "luigi",
