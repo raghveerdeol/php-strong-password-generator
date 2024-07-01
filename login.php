@@ -9,25 +9,27 @@
 // Prevedere l'uso di qualsiasi controllo attraverso una funzione inserita in un file separato in 'src/functions.php/') (modificato)
 session_start(); 
 require_once __DIR__ . "/listautenti.php";
-
-if (isset($_POST["username"])) {
+if (isset($_SESSION['logged']) && $_SESSION['logged'] === true) {
+    Header('Location: ./index.php');
+}
+$tentaoAccesso = false;
+if (isset($_POST["username"]) && isset($_POST["password"])) {
     $username = $_POST["username"];
-} else {
-    $username = "";
-}
-if (isset($_POST["password"])) {
     $password = $_POST["password"];
-} else {
-    $password = "";
-}
-function login($user, $chiave, $lista){
-    for ($i=0; $i < count($lista) ; $i++) {
-        if (($user == $lista[$i]["username"]) && ($chiave == $lista[$i]["password"])) {
-            return "./index.php";
-            break;
+    foreach ($utenti as $utente) {
+        if ($utente["username"] === $username) {
+            if ($utente["password"] === $password) {
+                $_SESSION['username'] = $username;
+                $_SESSION['password'] = $password;
+                $_SESSION['logged'] = true;
+                Header('Location: ./index.php');
+                break;
+            }
         }
-    } 
-    return "./login.php";
+    }
+    if (!isset($_SESSION["logged"])) {
+        $tentaoAccesso = true;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -39,7 +41,7 @@ function login($user, $chiave, $lista){
 </head>
 <body>
     <main>
-        <form action="<?php echo login($username,$password ,$utenti); ?>" method="post">
+        <form action="./login.php" method="post">
             <div>
                 <label for="username">Inserire username:</label>
                 <input type="text" name="username" id="username">
@@ -50,6 +52,11 @@ function login($user, $chiave, $lista){
             </div>
             <input type="submit" value="submit">
         </form>
+        <div>
+            <?php if ($tentaoAccesso) { ?>
+                <pre><?php echo 'Errore: i dati inseriti non sono validi'; ?></pre>
+            <?php } ?>
+        </div>
     </main>
 </body>
 </html>
